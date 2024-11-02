@@ -1,1 +1,1 @@
-# RrjetaK-Socket_programming
+# Rrjeta_kompjuterike-Socket_programming
