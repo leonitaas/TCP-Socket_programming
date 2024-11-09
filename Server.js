@@ -91,7 +91,52 @@ const server = net.createServer((socket) => {
       } else {
         socket.write('You have read-only access. Execute access is restricted.\n');
       }
+    } else if (message === 'access_folder') {
+      const folderPath = path.join(__dirname, 'server_files');
+      fs.readdir(folderPath, (err, files) => {
+        if (err) {
+          socket.write('Error accessing folder.\n');
+          console.error(err);
+        } else {
+          socket.write(`Files in server folder:\n${files.join('\n')}\n`);
+        }
+      });
+    } else {
+      socket.write('Invalid command. Use "write:<filename>:<data>", "read:<filename>", "execute:<command>", or "access_folder".\n');
     }
+  });
+
+  socket.on('timeout', () => {
+    console.log(`Client ${clientAddress} timed out due to inactivity.`);
+    socket.end('Connection closed due to inactivity.\n');
+    removeClient(socket);
+  });
+
+  socket.on('end', () => {
+    console.log(`Client ${clientAddress} disconnected.`);
+    logRequest(clientAddress, 'Disconnected');
+    removeClient(socket);
+  });
+
+  socket.on('error', (err) => {
+    console.error(`Error with client ${clientAddress}:`, err);
+    removeClient(socket);
+  });
+
+  function removeClient(socket) {
+    const index = clients.indexOf(socket);
+    if (index !== -1) clients.splice(index, 1);
+    if (socket === exclusiveClient) {
+      exclusiveClient = clients[0] || null;
+      if (exclusiveClient) {
+        exclusiveClient.write('You now have exclusive write, read, and execute access on this server.\n');
+      }
+    }
+  }
+});
+
+server.listen(PORT, HOST, () => {
+  console.log(`Server running on ${HOST}:${PORT}`);
+});
 
 
-  })})
