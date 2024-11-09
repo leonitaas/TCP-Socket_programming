@@ -45,4 +45,53 @@ const server = net.createServer((socket) => {
   } else {
     socket.write('You have read-only access.\n');
   }
-})
+  
+  console.log(`New connection from ${clientAddress}`);
+  logRequest(clientAddress, 'Connected');
+
+  socket.setTimeout(60000);
+
+  socket.on('data', (data) => {
+    const message = data.toString().trim();
+    console.log(`Received message from ${clientAddress}: ${message}`);
+    saveMessage(clientAddress, message);
+
+    if (message.startsWith('write:')) {
+      if (socket === exclusiveClient) {
+        const parts = message.split(':');
+        const filename = parts[1];
+        const dataToWrite = parts.slice(2).join(':').trim();
+        writeToServerFile(filename, dataToWrite);
+        socket.write(`Data successfully written to ${filename}.\n`);
+      } else {
+        socket.write('You have read-only access. Write access is restricted.\n');
+      }
+    } else if (message.startsWith('read:')) {
+      const filename = message.slice(5).trim();
+      const filePath = path.join(__dirname, 'server_files', filename);
+      fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+          socket.write(`Error reading file ${filename}.\n`);
+          console.error(err);
+        } else {
+          socket.write(`File content of ${filename}:\n${data}\n`);
+        }
+      });
+    } else if (message.startsWith('execute:')) {
+      if (socket === exclusiveClient) {
+        const command = message.slice(8).trim();
+        exec(command, (err, stdout, stderr) => {
+          if (err) {
+            socket.write(`Error executing command: ${stderr}\n`);
+            console.error(err);
+          } else {
+            socket.write(`Command executed successfully. Output:\n${stdout}\n`);
+          }
+        });
+      } else {
+        socket.write('You have read-only access. Execute access is restricted.\n');
+      }
+    }
+
+
+  })})
