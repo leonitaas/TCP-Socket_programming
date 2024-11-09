@@ -15,10 +15,11 @@ This project is developed from the authors below with full rights.
 
 [Leonita Sinani](https://github.com/leonitaas)
 
-[Linda Hasanaj](https://github.com/Linda-Hasanaj)
-
 [Leutrim Morina](https://github.com/LeutrimMorina13)
 
 [Leutrim Hajdini](https://github.com/leutrimhajdini)
+
+[Linda Hasanaj](https://github.com/Linda-Hasanaj)
+
 
 
