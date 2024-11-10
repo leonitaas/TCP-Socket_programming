@@ -30,7 +30,8 @@ Prerequisites  : Ensure you have Node.js installed.
 
 4. Close the connection:
 
-       The connection will close either when the client or server terminates, or when one of the scripts is stopped.
+       The connection between the server and a client will close either when the client or server terminates,
+       when the client is inactive for a specific amount of time, or when one of the scripts is stopped.
 
 # Confidential
 This project is developed from the authors below with full rights.
