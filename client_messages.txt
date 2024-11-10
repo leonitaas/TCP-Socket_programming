@@ -1,0 +1,10 @@
+[2024-11-10T13:57:50.646Z] - 127.0.0.1:63711: write
+[2024-11-10T13:58:27.867Z] - 127.0.0.1:63711: write:leutrimhtest.txt:"Leutrim Hajdini test i komandes write nga ana e klientit"
+[2024-11-10T13:59:11.206Z] - 127.0.0.1:63763: write:<LEUTRIMH.TXT>:<LEUTRIM HAJDINI TEST NGA ANA E KLIENTIT>
+[2024-11-10T13:59:28.999Z] - 127.0.0.1:49892: write
+[2024-11-10T13:59:36.888Z] - 127.0.0.1:49892: read:server_log.txt
+[2024-11-10T13:59:44.573Z] - 127.0.0.1:49892: read:<server_log.txt>
+[2024-11-10T13:59:49.841Z] - 127.0.0.1:49892: read:server_log
+[2024-11-10T13:59:54.403Z] - 127.0.0.1:49892: read:server_log.txt
+[2024-11-10T14:00:00.413Z] - 127.0.0.1:49892: access_folder
+[2024-11-10T14:00:25.418Z] - 127.0.0.1:49892: access_folder
