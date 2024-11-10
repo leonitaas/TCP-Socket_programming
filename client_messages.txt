@@ -11,3 +11,6 @@
 [2024-11-10T14:33:35.626Z] - 127.0.0.1:50603: write:Leutrimh.txt:Test nga Leutrim Hajdini v2
 [2024-11-10T14:33:45.638Z] - 127.0.0.1:50603: read:Leutrimh.txt
 [2024-11-10T14:33:50.834Z] - 127.0.0.1:50603: access_folder
+[2024-11-10T20:42:14.907Z] - 127.0.0.1:56146: write: client_messages.txt:testi101
+[2024-11-10T20:42:55.127Z] - 127.0.0.1:56146: read:client_messages.txt
+[2024-11-10T20:43:28.720Z] - 127.0.0.1:56146: read:server_log.txt
